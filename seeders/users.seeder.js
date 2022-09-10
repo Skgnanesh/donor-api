@@ -2,6 +2,7 @@ var Seeder = require('mongoose-data-seed').Seeder;
 var Model = require('../src/models/user');
 const ObjectId = require('mongodb').ObjectID;
 
+
 var data = [
   {
     _id: new ObjectId('5d2bc042d4e3bb2ca9554daf'),

@@ -7,7 +7,7 @@ const cors = require('cors');
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 //MongoDB configurations
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
+const connect=mongoose.connect("mongodb+srv://donorbuddy:donorbuddy@cluster0.ftqkwbu.mongodb.net/?retryWrites=true&w=majority");
 mongoose.set('useFindAndModify', false);
 
 // Routes
@@ -40,6 +40,7 @@ app.use("*", (req, res) => {
     .send('Not found');
 });
 
-app.listen(port, () => {
+app.listen(port, async() => {
+  await connect
   console.log('Starting server on port ' + port)
 });

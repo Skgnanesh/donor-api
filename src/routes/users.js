@@ -12,11 +12,20 @@ router.get('/:id*?', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/', (req, res, next) => {
-  User
-    .create(req.body)
-    .then(user => res.json(user))
-    .catch(next);
+router.post('/', async(req, res, next) => {
+
+  try{
+       let user  = await User.create(req.body);
+
+       return res.send(user)
+
+       console.log(user)
+  }
+  catch(err){
+    console.log(err)
+    return res.send({err:err.message})
+  }
+
 });
 
 router.put('/:id', function (req, res, next) {
